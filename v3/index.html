@@ -246,22 +246,17 @@ Rueda o pellizco para acercarte · arrastra para moverte · cada foto guarda un 
   <div class="ldate">Santiago, 22 de noviembre de 2026</div>
   <h3>Mi Martina</h3>
   <div id="lock">
-    <div class="lk-badge">🔒 Carta bajo custodia</div>
-    <h4>Alto ahí, señorita.</h4>
-    <p>Esta carta está retenida por orden de <b>Tomás</b>, más conocido en el ambiente como <b>«el Bacteria»</b>.</p>
-    <p>Resulta que el Bacteria se mandó un regalo tan, tan bueno —un <b>Book</b> entero, con cartas de la familia y fotos impresas en papel de verdad, como en la época de los dinosaurios— que este papá decidió hacerse a un lado y no robarle la película.</p>
-    <ol>
-      <li>Abre el regalo de Tomás.</li>
-      <li>Busca mi carta ahí, en papel, como corresponde.</li>
-      <li>Léela entera. Sí, puedes llorar. No, no vale leerla en diagonal.</li>
-      <li>Al final de esa carta hay una clave. Escríbela aquí y esta carta será tuya para siempre.</li>
-    </ol>
+    <div class="lk-badge">🔒 Carta sellada</div>
+    <h4>Todavía no, señorita.</h4>
+    <p>Esta carta existe, está escrita y es tuya. Pero tiene fecha de apertura, y no es hoy.</p>
+    <p>Como todo lo bueno en esta familia, llega a su tiempo. La clave va a llegar a tus manos cuando sea el momento: no la busques, ella te encuentra a ti.</p>
+    <p>Mientras tanto, recorre las fotos. Cada una tiene algo que decirte.</p>
     <form id="lockForm" autocomplete="off">
       <input id="pw" type="text" placeholder="Escribe la clave" aria-label="Clave de la carta" autocapitalize="characters" spellcheck="false">
       <button type="submit">Abrir</button>
     </form>
     <div id="lockMsg"></div>
-    <p class="ps">PD para Tomás: eres la única bacteria que esta familia recibe con los brazos abiertos. Te pasaste. 🦠💛</p>
+    <p class="ps">PD: intentar adivinarla también cuenta como amor. Pero no abre la carta. 💛</p>
   </div>
   <div id="letterWrap" class="locked"><div id="letterBody"></div><div class="firma">Papá</div><button class="credbtn" id="credFromLetter">Ver los créditos 🎬</button></div>
 </div></div>
@@ -316,7 +311,7 @@ async function unlock(pw,silent){
     return true;
   }catch(e){return false;}
 }
-const NOPE=["Mmm, no. ¿Seguro que leíste la carta o te fuiste directo a las fotos?","Nop. Pregúntale al Bacteria, él sabe dónde está.","Clave incorrecta. Este papá no revela sus fuentes. Tú tampoco lo harías.","Casi… pero no. Vuelve al Book, que ahí está.","Error 2211: hija apurada detectada. Respira y lee la carta completa."];
+const NOPE=["Mmm, no. Paciencia, Carrasco.","Nop. La clave llega sola, no se adivina.","Clave incorrecta. Este papá no revela sus fuentes.","Casi… pero no. Todo a su tiempo.","Error 2211: hija apurada detectada. Respira y vuelve a las fotos."];
 let nopeI=0;
 $('#lockForm').addEventListener('submit',async e=>{e.preventDefault();const v=$('#pw').value;if(!v.trim())return;
   const ok=await unlock(v,false);
@@ -514,7 +509,7 @@ function openCredits(){ stopTour(); pin(false); closeLetter();
   const autores=[...new Set(DATA.msgs.map(m=>m[1].split(' · ')[0]))], destacados=['José Martí','Gustavo Adolfo Bécquer','Antonio Machado','William Shakespeare','Jane Austen'];
   const otros=autores.filter(a=>!destacados.includes(a)).length;
   const L=[['PROTAGONISTA','Martina Carrasco'],['COPROTAGONISTA','Papá'],['LA HERMANA QUE SE VA A ENOJAR CON LA CARTA','Eloísa'],
-    ['PRODUCCIÓN EJECUTIVA DEL BOOK','Tomás «el Bacteria»'],['DIRECCIÓN DE FOTOGRAFÍA',`${N} momentos · 2015 – 2026`],
+    ['DIRECCIÓN DE FOTOGRAFÍA',`${N} momentos · 2015 – 2026`],
     ['GUION',destacados.join(' · ')+`<br>y ${otros} autores más`],['BANDA SONORA ORIGINAL','Compuesta para ella'],
     ['EFECTOS ESPECIALES','Serpentinas, challas<br>y un papá emocionado'],['LOCACIONES','Santiago, y todos los lugares<br>donde fuimos felices'],['DURACIÓN','23 años (y contando)']];
   $('#roll').innerHTML=`<div class="ct">Martina</div><div class="cs">una película de la vida real</div>`+L.map(([r,w])=>`<div class="role">${r}</div><div class="who">${w}</div>`).join('')+
